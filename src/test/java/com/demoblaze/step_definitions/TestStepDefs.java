@@ -1,11 +1,15 @@
 package com.demoblaze.step_definitions;
 
 import com.demoblaze.pages.ProductPage;
+import com.demoblaze.utilities.BrowserUtils;
 import com.demoblaze.utilities.ConfigurationReader;
 import com.demoblaze.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TestStepDefs {
     ProductPage productPage = new ProductPage();
@@ -17,8 +21,17 @@ public class TestStepDefs {
     }
     @When("buyer adds from {string} category {string} product to cart")
     public void buyer_adds_from_category_product_to_cart(String category, String product) {
-    productPage.getLink(category);
-    productPage.getLink(product);
+        productPage.getLink(category);
+        BrowserUtils.sleep(1);
+        productPage.getLink(product);
+        BrowserUtils.sleep(1);
+        productPage.getLink("Add to cart");
+        // handle alert
+        // BrowserUtils.sleep(1); static wait
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = Driver.getDriver().switchTo().alert();
+        alert.accept();
     }
     @When("buyer clicks on {string} link")
     public void buyer_clicks_on_link(String string) {
