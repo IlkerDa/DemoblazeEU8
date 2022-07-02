@@ -7,6 +7,6 @@ import org.openqa.selenium.WebElement;
 public class ProductPage extends BasePage{
 
     public WebElement getProductElement(String product){
-        return Driver.getDriver().findElement(By.xpath("//[.='"+product+"']"));
+        return Driver.getDriver().findElement(By.xpath("//td[.='"+product+"']"));
     }
 }

@@ -23,9 +23,9 @@ public class TestStepDefs {
     @When("buyer adds from {string} category {string} product to cart")
     public void buyer_adds_from_category_product_to_cart(String category, String product) {
         productPage.getLink(category);
-        BrowserUtils.sleep(1);
+        BrowserUtils.sleep(2);
         productPage.getLink(product);
-        BrowserUtils.sleep(1);
+        BrowserUtils.sleep(2);
         productPage.getLink("Add to cart");
         // handle alert
         // BrowserUtils.sleep(1); static wait
@@ -36,11 +36,13 @@ public class TestStepDefs {
     }
     @When("buyer clicks on {string} link")
     public void buyer_clicks_on_link(String link) {
+        BrowserUtils.sleep(2);
         productPage.getLink(link);
 
     }
     @Then("buyer should see {string} is added to cart")
     public void buyer_should_see_is_added_to_cart(String product) {
+        BrowserUtils.sleep(2);
         Assert.assertTrue(productPage.getProductElement(product).isDisplayed());
     }
 
